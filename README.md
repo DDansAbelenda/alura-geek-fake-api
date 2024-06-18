@@ -1,88 +1,94 @@
-[spanish](https://github.com/SofiDevO/alurageek-API/tree/spanish)
+## Despliega JSON Server en Vercel
 
-## Deploy JSON Server to Vercel
+### Cómo usar (resumen)
 
-A template for deploying [JSON Server](https://github.com/typicode/json-server) on [Vercel](https://vercel.com), allowing you to run a fake REST API online 🐣!
+1. Clona este repositorio.
+2. Actualiza o usa el [`db.json`](./db.json) predeterminado en el repositorio.
+3. Regístrate o inicia sesión en [Vercel](https://vercel.com).
+4. Desde el panel de Vercel, haz clic en "**+ New Project**" y luego "**Import**" tu repositorio.
+5. En la pantalla "**Configure Project**", deja todo como está por defecto y haz clic en "**Deploy**".
+6. Espera hasta que el despliegue esté completo, ¡y tu propio servidor JSON estará listo para funcionar!
 
-Demo from this repository: 
-https://alurageek-api.vercel.app/
-### How to use (resume)
-
-1. Click "**Use this template**" or clone this repository.
-2. Update or use the default [`db.json`](./db.json) in the repository.
-3. Sign up or log in to [Vercel](https://vercel.com).
-4. From the Vercel dashboard, click "**+ New Project**" and then "**Import**" your repository.
-5. On the "**Configure Project**" screen, leave everything as default and click "**Deploy**".
-6. Wait until deployment is complete, and your custom JSON server will be ready to serve!
-
-## Default `db.json`
+## `db.json` Predeterminado
 
 ```json
 {
- "product": [
-        {
-            "img": "https://www.claroshop.com/c/star-wars-day/img/categorias/TAZAS_CATEGORIAS_STAR_WARS.png",
-            "name": "Trooper mug",
-            "price": "$60.00",
-            "description": "Trooper helmet mug",
-            "category": "starwars",
-            "id": 1
-        },
-        {
-            "img": "https://cdn1.coppel.com/images/catalog/mkp/1773/5000/17733590-1.jpg",
-            "name": "Vader Funko",
-            "price": "$60.00",
-            "description": "Collectible Funko of Darth Vader",
-            "category": "starwars",
-            "id": 2
-        }
- ]
+  "productos": [
+    {
+      "id": "8ddf",
+      "nombre": "Zapatillas Rojas Nike",
+      "precio": "100",
+      "imagen": "assets/products/zapatillas-rojas-nike.jpg"
+    },
+    {
+      "id": "4ce7",
+      "nombre": "Zapatillas grises",
+      "precio": "500",
+      "imagen": "assets\\products\\zapatillas-grises.jpg"
+    },
+    {
+      "id": "7a6e",
+      "nombre": "Reloj Digital Blanco",
+      "precio": "150",
+      "imagen": "assets\\products\\reloj-digital.jpg"
+    },
+    {
+      "id": "2491",
+      "nombre": "Audífonos negros gamers",
+      "precio": "530",
+      "imagen": "assets\\products\\audifonos.jpg"
+    },
+    {
+      "id": "95aa",
+      "nombre": "Carro Azul Moderno",
+      "precio": "52000",
+      "imagen": "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  ]
 }
 ```
 
-## Build It Yourself
+## Créalo por Ti Mismo
 
-If you'd like to create the project from scratch, I have a [YouTube video Tutorial (Spanish) that guides you through deploying your own fake API with db-json and Vercel.](https://www.youtube.com/channel/UC36_js-krsAHAEAWpEDhHtw) 
+### Paso 1
 
-### Step 1
+Crea un nuevo repositorio, por ejemplo, **alurageek-API**. Luego clona ese repositorio vacío.
 
-Create a new repository, for example, **alurageek-API**. Then clone that empty repository.
+### Paso 2
 
-### Step 2
-
-You need to run the npm init command:
+Necesitas ejecutar el comando `npm init`:
 ```
 npm init -y
 ```
 
-This will generate a **package.json**. Now, what you need to do is change these lines:
+Esto generará un **package.json**. Ahora, lo que necesitas hacer es cambiar estas líneas:
 
-Change this line:
+Cambia esta línea:
 ``` 
  "main": "index.js",
 ```
 
-To this:
+A esto:
 
 ```
   "main": "api/server.js",
 ```
 
-And this:
+Y esto:
 
 ```
 "test": "echo \"Error: no test specified\" && exit 1"
 ```
 
-To this:
+A esto:
 
 ```
 "start": "node api/server.js"
 ```
 
-### Step 3
+### Paso 3
 
-Now it's time to run the command:
+Ahora es el momento de ejecutar el comando:
 
 ```
 npm install json-server cors
@@ -90,48 +96,48 @@ npm install json-server cors
 
 ![Alt text](image.png)
 
-You'll see that both **cors** and ***json-server*** have been added to the package.json.
+Verás que tanto **cors** como ***json-server*** se han agregado al package.json.
 
-### Step 4
+### Paso 4
 
-Run the command:
+Ejecuta el comando:
 ```
 npm install json-server
 ```
 
-Add the ***.gitignore*** file and add ***node_modules***.
+Agrega el ***.gitignore*** y agrega ***node_modules***.
 
-### Step 5
+### Paso 5
 
-Create a ***db.json*** file and add your own data.
+Crea un archivo ***db.json*** y agrega tus propios datos.
 
-Additionally, you'll need to add a new [Folder called ***api***](./api/)  and, inside it, this [**server.js**](./api/server.js) file:
+Además, necesitarás agregar una nueva [Carpeta llamada ***api***](./api/) y, dentro de ella, este archivo [**server.js**](./api/server.js):
 
 ```javascript
-// See https://github.com/typicode/json-server#module
+// Ver https://github.com/typicode/json-server#module
 const jsonServer = require('json-server')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
-// Add this before server.use(router)
+// Agrega esto antes de server.use(router)
 server.use(jsonServer.rewriter({
     '/api/*': '/$1',
-    '/product/:resource/:id/show': '/:resource/:id'
+    '/producto/:recurso/:id/ver': '/:recurso/:id'
 }))
 server.use(router)
 server.listen(3000, () => {
-    console.log('JSON Server is running')
+    console.log('El servidor JSON está funcionando')
 })
 
-// Export the Server API
+// Exporta la API del Servidor
 module.exports = server
 ```
 
-### Step 6
+### Paso 6
 
-Create a new file named [***vercel.json***](./vercel.json)
+Crea un archivo nuevo llamado [***vercel.json***](./vercel.json)
 
 ```json
 {
@@ -150,11 +156,11 @@ Create a new file named [***vercel.json***](./vercel.json)
 }
 ```
 
-# Don't forget to commit & push your changes 🐣
+# No olvides hacer commit y push a tus cambios 🐣
 
-Go to your Vercel account, connect a new project with your repository, and deploy it💙
+Ve a tu cuenta de Vercel, conecta un nuevo proyecto con tu repositorio y despliega 💙
 
-## You must be patient
+## Debes tener paciencia
 
-It could take a couple of minutes to finally work. ⏰🥹
+Puede tomar varios minutos para que funcione correctamente. ⏰
 
